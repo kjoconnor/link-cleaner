@@ -11,7 +11,7 @@ from urllib.parse import urlparse, urlencode, urlunparse
 import validators
 
 from flask import Flask, request, send_file
-from peewee import fn
+from peewee import fn, PeeweeException
 
 from cleaners import BaseCleaner
 from db import CleanedLink
@@ -33,17 +33,23 @@ def clean(url):
     if not validators.url(url):
         return "Invalid URL", 400
 
-    cleaned_link_row = CleanedLink.create(original_url=url, netloc=parsed_url.netloc)
+    try:
+        cleaned_link_row = CleanedLink.create(
+            original_url=url, netloc=parsed_url.netloc
+        )
+    except PeeweeException:
+        cleaned_link_row = False
 
     start_time = time.time()
     cleaned_url = BaseCleaner.clean(url)
     end_time = time.time()
 
-    cleaned_link_row.update(
-        success=True,
-        elapsed_time=(end_time - start_time),
-        cleaned_url=cleaned_url,
-    ).execute()
+    if cleaned_link_row:
+        cleaned_link_row.update(
+            success=True,
+            elapsed_time=(end_time - start_time),
+            cleaned_url=cleaned_url,
+        ).execute()
 
     if request.headers["Accept"] == "application/json":
         return json.dumps(
