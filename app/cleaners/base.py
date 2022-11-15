@@ -35,9 +35,7 @@ class BaseCleaner(object):
 
     @classmethod
     def __init_subclass__(cls, **kwargs):
-        print(f"Init subclassing with {cls}")
         super().__init_subclass__(**kwargs)
-        print(cls)
         cls.register(cls)
 
     @classmethod
