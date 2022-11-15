@@ -13,3 +13,5 @@ flask run
 Just browse/send a GET request to `/clean/<url you want to clean>` and it'll return a clean link after a few seconds. Alternatively, send an `Accept: application/json` header and it will return a JSON dict with one key named `cleaned_url` containing the cleaned URL.
 
 You can also browse to `/stats` to see a beautifully designed stats page.
+
+This is running on Render at https://link-cleaner.onrender.com/, so it can be used like https://link-cleaner.onrender.com/clean/https://www.google.com for instance.
