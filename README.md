@@ -1,5 +1,5 @@
 # Link Cleaner
-This is a simple Flask service that will take a link and attempt to "clean" it. That means it will follow redirects to its eventual end, try and remove known tracker query parameters, amd maybe more.
+This is a simple Flask service that will take a link and attempt to "clean" it. That means it will follow redirects to its eventual end, try and remove known tracker query parameters, and maybe more.
 
 ## Running
 ```shell
