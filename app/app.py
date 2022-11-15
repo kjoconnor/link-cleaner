@@ -21,6 +21,20 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("app")
 
 
+@app.route("/")
+def index():
+    return """
+<script type="text/javascript">
+    function redirectToClean() {
+        const url = document.getElementById("url").value;
+        window.location = "/clean/" + url;
+    }
+</script>
+<input type="url" name="url" id="url">
+<button onclick="redirectToClean()">Clean URL</button>
+    """
+
+
 @app.route("/clean/<path:url>")
 def clean(url):
     parsed_url = urlparse(url)
