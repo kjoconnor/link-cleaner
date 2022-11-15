@@ -114,3 +114,7 @@ def stats():
 
     <footer>Generated at {generation_time}.</footer>
     """
+
+
+if __name__ == "__main__":
+    app.run()
