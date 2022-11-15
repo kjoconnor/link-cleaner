@@ -102,7 +102,7 @@ class BaseCleaner(object):
         parsed_qs = dict(parse_qsl(parsed_url.query))
 
         for param in cls.TRACKING_QUERY_PARAMS:
-            _ = parsed_qs.pop(param)
+            _ = parsed_qs.pop(param, None)
 
         reassembled_url = list(parsed_url)
         reassembled_url[4] = urlencode(parsed_qs)
