@@ -41,10 +41,9 @@ class BaseCleaner(object):
     @classmethod
     def clean_url(cls, url):
         if getattr(cls, "SHOULD_RESOLVE_REDIRECTS"):
-            redirected_url = cls.resolve_redirects(url)
+            url = cls.resolve_redirects(url)
 
-        no_params_url = cls.remove_tracking_query_params(redirected_url)
-        return no_params_url
+        return cls.remove_tracking_query_params(url)
 
     @classmethod
     def find_cleaner(cls, url):
