@@ -24,7 +24,7 @@ class BaseCleaner(object):
     def clean(cls, url):
         logger.info(f"Starting clean for {url}")
         cleaner = cls.find_cleaner(url)
-        logger.info(f"Using cleaner {cleaner}")
+        logger.info(f"Using cleaner {cleaner.__name__}")
         cleaned_url = cleaner.clean_url(url)
         logger.info(f"Got cleaned url of {cleaned_url}")
 
